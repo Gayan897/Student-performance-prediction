@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:st_performance_predictor/pages/home_page_no_state.dart';
-import 'package:st_performance_predictor/pages/home_page_with_state.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:  HomePageWithState(),
+      home: const Scaffold(
+        body: Center(
+          child: Text('Hello World'),
+        ),
+      ),
     );
   }
 }
