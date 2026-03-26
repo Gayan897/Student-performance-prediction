@@ -30,11 +30,11 @@ class AppTheme {
         cardTheme: CardThemeData(
           color: Colors.white,
           elevation: 0,
+          margin: const EdgeInsets.only(bottom: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
             side: const BorderSide(color: Color(0xFFEEEEEE), width: 0.5),
           ),
-          margin: const EdgeInsets.only(bottom: 12),
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
@@ -86,33 +86,33 @@ class AppTheme {
   static Color gradeColor(String grade) {
     switch (grade) {
       case 'A+': return success;
-      case 'A': return primary;
-      case 'B': return const Color(0xFF3B6D11);
-      case 'C': return warning;
-      case 'D': return const Color(0xFF993C1D);
-      default: return danger;
+      case 'A':  return primary;
+      case 'B':  return const Color(0xFF3B6D11);
+      case 'C':  return warning;
+      case 'D':  return const Color(0xFF993C1D);
+      default:   return danger;
     }
   }
 
   static Color riskColor(String risk) {
     switch (risk) {
-      case 'Excellent': return success;
-      case 'Good': return primary;
-      case 'Average': return const Color(0xFF3B6D11);
+      case 'Excellent':     return success;
+      case 'Good':          return primary;
+      case 'Average':       return const Color(0xFF3B6D11);
       case 'Below Average': return warning;
-      case 'At Risk': return const Color(0xFF993C1D);
-      default: return danger;
+      case 'At Risk':       return const Color(0xFF993C1D);
+      default:              return danger;
     }
   }
 
   static String gradeEmoji(String grade) {
     switch (grade) {
       case 'A+': return '🏆';
-      case 'A': return '⭐';
-      case 'B': return '👍';
-      case 'C': return '📚';
-      case 'D': return '⚠️';
-      default: return '🚨';
+      case 'A':  return '⭐';
+      case 'B':  return '👍';
+      case 'C':  return '📚';
+      case 'D':  return '⚠️';
+      default:   return '🚨';
     }
   }
 }

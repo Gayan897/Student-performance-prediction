@@ -40,7 +40,6 @@ class DashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Stats row
                   Row(
                     children: [
                       StatCard(
@@ -67,26 +66,20 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
 
-                  // Grade distribution chart
                   if (gradeDist.isNotEmpty) ...[
                     const SectionHeader(title: 'Grade Distribution'),
                     Card(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 180,
-                              child: _GradeBarChart(gradeDist: gradeDist),
-                            ),
-                          ],
+                        child: SizedBox(
+                          height: 180,
+                          child: _GradeBarChart(gradeDist: gradeDist),
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
                   ],
 
-                  // Top performers
                   if (topStudents.isNotEmpty) ...[
                     const SectionHeader(title: 'Top Performers'),
                     Card(
@@ -103,7 +96,6 @@ class DashboardScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                   ],
 
-                  // At-risk students
                   SectionHeader(
                     title: 'At-risk Students',
                     trailing: atRiskStudents.isNotEmpty
@@ -139,9 +131,7 @@ class DashboardScreen extends StatelessWidget {
                         : Padding(
                             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                             child: Column(
-                              children: atRiskStudents
-                                  .map((r) => _RiskTile(result: r))
-                                  .toList(),
+                              children: atRiskStudents.map((r) => _RiskTile(result: r)).toList(),
                             ),
                           ),
                   ),
@@ -165,9 +155,7 @@ class _GradeBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const gradeOrder = ['A+', 'A', 'B', 'C', 'D', 'F'];
-    final bars = gradeOrder
-        .where((g) => gradeDist.containsKey(g))
-        .toList();
+    final bars = gradeOrder.where((g) => gradeDist.containsKey(g)).toList();
 
     return BarChart(
       BarChartData(
@@ -222,7 +210,7 @@ class _GradeBarChart extends StatelessWidget {
         ),
         gridData: FlGridData(
           show: true,
-          getDrawingHorizontalLine: (v) => FlLine(color: const Color(0xFFF0F0F0), strokeWidth: 1),
+          getDrawingHorizontalLine: (v) => const FlLine(color: Color(0xFFF0F0F0), strokeWidth: 1),
           drawVerticalLine: false,
         ),
         borderData: FlBorderData(show: false),
