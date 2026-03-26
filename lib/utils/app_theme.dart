@@ -28,15 +28,6 @@ class AppTheme {
           color: Color(0xFF1A1A1A),
         ),
       ),
-      cardTheme: CardThemeData(
-        color: Colors.white,
-        elevation: 0,
-        margin: const EdgeInsets.only(bottom: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-          side: const BorderSide(color: Color(0xFFEEEEEE), width: 0.5),
-        ),
-      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.white,
@@ -52,8 +43,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: primary, width: 1.5),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         labelStyle: const TextStyle(color: Color(0xFF888888), fontSize: 14),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -62,8 +52,7 @@ class AppTheme {
           foregroundColor: Colors.white,
           elevation: 0,
           minimumSize: const Size.fromHeight(50),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
@@ -91,54 +80,41 @@ class AppTheme {
     );
   }
 
+  static ShapeBorder get cardShape => RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14),
+        side: const BorderSide(color: Color(0xFFEEEEEE), width: 0.5),
+      );
+
   static Color gradeColor(String grade) {
     switch (grade) {
-      case 'A+':
-        return success;
-      case 'A':
-        return primary;
-      case 'B':
-        return const Color(0xFF3B6D11);
-      case 'C':
-        return warning;
-      case 'D':
-        return const Color(0xFF993C1D);
-      default:
-        return danger;
+      case 'A+': return success;
+      case 'A':  return primary;
+      case 'B':  return const Color(0xFF3B6D11);
+      case 'C':  return warning;
+      case 'D':  return const Color(0xFF993C1D);
+      default:   return danger;
     }
   }
 
   static Color riskColor(String risk) {
     switch (risk) {
-      case 'Excellent':
-        return success;
-      case 'Good':
-        return primary;
-      case 'Average':
-        return const Color(0xFF3B6D11);
-      case 'Below Average':
-        return warning;
-      case 'At Risk':
-        return const Color(0xFF993C1D);
-      default:
-        return danger;
+      case 'Excellent':     return success;
+      case 'Good':          return primary;
+      case 'Average':       return const Color(0xFF3B6D11);
+      case 'Below Average': return warning;
+      case 'At Risk':       return const Color(0xFF993C1D);
+      default:              return danger;
     }
   }
 
   static String gradeEmoji(String grade) {
     switch (grade) {
-      case 'A+':
-        return '🏆';
-      case 'A':
-        return '⭐';
-      case 'B':
-        return '👍';
-      case 'C':
-        return '📚';
-      case 'D':
-        return '⚠️';
-      default:
-        return '🚨';
+      case 'A+': return '🏆';
+      case 'A':  return '⭐';
+      case 'B':  return '👍';
+      case 'C':  return '📚';
+      case 'D':  return '⚠️';
+      default:   return '🚨';
     }
   }
 }

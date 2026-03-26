@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 import '../utils/app_theme.dart';
 
+// Styled card that replaces the cardTheme shape (Flutter 3.22 compatible)
+class AppCard extends StatelessWidget {
+  final Widget child;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+
+  const AppCard({super.key, required this.child, this.margin, this.padding});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: margin ?? const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFEEEEEE), width: 0.5),
+      ),
+      child: padding != null ? Padding(padding: padding!, child: child) : child,
+    );
+  }
+}
+
 class GradeBadge extends StatelessWidget {
   final String grade;
   final double fontSize;
@@ -118,15 +140,10 @@ class StatCard extends StatelessWidget {
             Text(
               value,
               style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: color,
-              ),
+                  fontSize: 22, fontWeight: FontWeight.w700, color: color),
             ),
-            Text(
-              label,
-              style: const TextStyle(fontSize: 11, color: Color(0xFF888888)),
-            ),
+            Text(label,
+                style: const TextStyle(fontSize: 11, color: Color(0xFF888888))),
           ],
         ),
       ),
