@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../utils/app_theme.dart';
-import '../models/student.dart';
 
 class GradeBadge extends StatelessWidget {
   final String grade;
@@ -46,7 +45,8 @@ class RiskBadge extends StatelessWidget {
       ),
       child: Text(
         risk,
-        style: TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 12),
+        style:
+            TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 12),
       ),
     );
   }
@@ -154,7 +154,8 @@ class ScoreProgressBar extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Overall score', style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+            Text('Overall score',
+                style: TextStyle(fontSize: 13, color: Colors.grey[600])),
             Text(
               '${score.toInt()}/100',
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
@@ -218,7 +219,10 @@ class LabeledField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 13, color: Color(0xFF555555), fontWeight: FontWeight.w500),
+          style: const TextStyle(
+              fontSize: 13,
+              color: Color(0xFF555555),
+              fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 6),
         child,

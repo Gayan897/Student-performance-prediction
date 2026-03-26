@@ -1,7 +1,4 @@
-
-import 'dart:math';
-
-import 'package:st_performance_predictor/models/student.dart';
+import '../models/student.dart';
 
 class MLPredictor {
   // Weighted regression model
