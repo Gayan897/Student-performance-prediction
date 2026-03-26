@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Debug app_theme.dart
+        run: cat lib/utils/app_theme.dart
+
       - name: Analyze project source
         run: flutter analyze
 
