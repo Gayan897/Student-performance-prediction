@@ -1,30 +1,94 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:st_performance_predictor/models/student.dart';
+import 'package:st_performance_predictor/utils/ml_predictor.dart';
 
-import 'package:st_performance_predictor/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const StudentPredictorApp());
+  group('MLPredictor tests', () {
+    test('predicts A+ for excellent student', () {
+      final student = Student(
+        name: 'Test Student',
+        subject: 'Mathematics',
+        attendance: 95,
+        midtermScore: 90,
+        assignmentAvg: 88,
+        quizAvg: 92,
+      );
+      final result = MLPredictor.predict(student);
+      expect(result.grade, equals('A+'));
+      expect(result.score, greaterThanOrEqualTo(85));
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('predicts F for failing student', () {
+      final student = Student(
+        name: 'Test Student',
+        subject: 'Science',
+        attendance: 30,
+        midtermScore: 20,
+        assignmentAvg: 25,
+        quizAvg: 15,
+      );
+      final result = MLPredictor.predict(student);
+      expect(result.grade, equals('F'));
+      expect(result.score, lessThan(45));
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('predicts B for average student', () {
+      final student = Student(
+        name: 'Test Student',
+        subject: 'English',
+        attendance: 75,
+        midtermScore: 68,
+        assignmentAvg: 70,
+        quizAvg: 65,
+      );
+      final result = MLPredictor.predict(student);
+      expect(result.grade, equals('B'));
+      expect(result.score, inInclusiveRange(65, 74));
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('score is weighted correctly', () {
+      final student = Student(
+        name: 'Test Student',
+        subject: 'ICT',
+        attendance: 100,
+        midtermScore: 100,
+        assignmentAvg: 100,
+        quizAvg: 100,
+      );
+      final result = MLPredictor.predict(student);
+      expect(result.score, equals(100.0));
+    });
+
+    test('at risk flag for low score', () {
+      final student = Student(
+        name: 'Test Student',
+        subject: 'History',
+        attendance: 50,
+        midtermScore: 40,
+        assignmentAvg: 45,
+        quizAvg: 38,
+      );
+      final result = MLPredictor.predict(student);
+      expect(result.riskLevel, anyOf(['At Risk', 'Critical', 'Below Average']));
+    });
+
+    test('batch stats returns correct count', () {
+      final students = [
+        Student(name: 'A', subject: 'Math', attendance: 90, midtermScore: 85, assignmentAvg: 88, quizAvg: 82),
+        Student(name: 'B', subject: 'Math', attendance: 60, midtermScore: 50, assignmentAvg: 55, quizAvg: 48),
+        Student(name: 'C', subject: 'Math', attendance: 75, midtermScore: 70, assignmentAvg: 72, quizAvg: 68),
+      ];
+      final stats = MLPredictor.batchStats(students);
+      expect(stats['count'], equals(3));
+      expect(stats['avgScore'], isA<double>());
+      expect(stats['gradeDist'], isA<Map<String, int>>());
+    });
+
+    test('empty batch returns zero count', () {
+      final stats = MLPredictor.batchStats([]);
+      expect(stats['count'], equals(0));
+      expect(stats['avgScore'], equals(0.0));
+    });
   });
 }
